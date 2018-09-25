@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">登入介面</string>
+    <string name="input_username">請輸入用戶名</string>
+    <string name="input_password">請輸入密碼</string>
+    <string name="rem_password">記住密碼</string>
+    <string name="Login">登入</string>
+</resources>
