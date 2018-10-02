@@ -30,7 +30,6 @@ public class UploaderServlet extends HttpServlet {
 		super.destroy(); // Just puts "destroy" string in log
 		// Put your code here
 	}
-
 	/**
 	 * The doGet method of the servlet. <br>
 	 * 
@@ -48,29 +47,28 @@ public class UploaderServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
 
-		//Ê×ÏÈÅÐ¶ÏÒ»ÏÂ ÉÏ´«µÄÊý¾ÝÊÇ±íµ¥Êý¾Ý»¹ÊÇÒ»¸ö´øÎÄ¼þµÄÊý¾Ý 
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½Ò»ï¿½ï¿½ ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç±ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		if (isMultipart) {   //Èç¹ûÎªtrue ËµÃ÷ÊÇÒ»¸ö´øÓÐÎÄ¼þµÄÊý¾Ý
-			//ÄÃµ½servletµÄÕæÊµÂ·¾¶ 
+		if (isMultipart) {   //ï¿½ï¿½ï¿½Îªtrue Ëµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			//ï¿½Ãµï¿½servletï¿½ï¿½ï¿½ï¿½ÊµÂ·ï¿½ï¿½ 
 			String realpath = request.getSession().getServletContext().getRealPath("/files");
-			//´òÓ¡Ò»ÏÂÂ·¾¶
+			//ï¿½ï¿½Ó¡Ò»ï¿½ï¿½Â·ï¿½ï¿½
 			System.out.println("realpath-"+realpath);
 			File dir = new File(realpath);
 			if (!dir.exists())
-				dir.mkdirs(); //Èç¹ûÄ¿Â¼²»´æÔÚ °ÑÕâ¸öÄ¿Â¼¸ø´´½¨³öÀ´ 
+				dir.mkdirs(); //ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 			FileItemFactory factory = new DiskFileItemFactory();
-			ServletFileUpload upload = new ServletFileUpload(factory); //»ñÈ¡µ½ÉÏ´«ÎÄ¼þµÄ¶ÔÏóupload
+			ServletFileUpload upload = new ServletFileUpload(factory); //ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½upload
 			upload.setHeaderEncoding("UTF-8");
 			try {
-				//ÅÐ¶ÏÒ»ÏÂÉÏ´«µÄÊý¾ÝÀàÐÍ
+				//ï¿½Ð¶ï¿½Ò»ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				List<FileItem> items = upload.parseRequest(request);
 				for (FileItem item : items) {
-					if (item.isFormField()) { //ÉÏ´«µÄÊý¾ÝÀàÐÍ ÊÇÒ»¸ö±íµ¥ÀàÐÍ
-						String name1 = item.getFieldName();// µÃµ½ÇëÇó²ÎÊýµÄÃû³Æ
-						String value = item.getString("UTF-8");// µÃµ½²ÎÊýÖµ
+					if (item.isFormField()) { //ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+						String name1 = item.getFieldName();// ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+						String value = item.getString("UTF-8");// ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 						System.out.println(name1 + "=" + value);
 					} else {
-						//ËµÃ÷ÊÇÒ»¸öÎÄ¼þÀàÐÍ   ½øÐÐÉÏ´«
 						item.write(new File(dir, System.currentTimeMillis()
 								+ item.getName().substring(item.getName().lastIndexOf("."))));
 					}
@@ -81,7 +79,6 @@ public class UploaderServlet extends HttpServlet {
 			}
 		}
 	}
-
 	/**
 	 * The doPost method of the servlet. <br>
 	 * 
@@ -99,7 +96,6 @@ public class UploaderServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
-
 		doGet(request, response);
 	}
 
@@ -112,5 +108,4 @@ public class UploaderServlet extends HttpServlet {
 	public void init() throws ServletException {
 		// Put your code here
 	}
-
 }

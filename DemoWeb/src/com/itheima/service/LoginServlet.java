@@ -42,8 +42,8 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String pwd = request.getParameter("pwd");
 		
-		System.out.println("username:"+username);
-		System.out.println("password:"+pwd);
+		System.out.println("DemoWeb.LoginServlet.username:"+username);
+		System.out.println("DemoWeb.LoginServlet.password:"+pwd);
 		if(username != null && !"".equals(username) && pwd != null && !"".equals(pwd)){
 			
 			if(username.equals("root") && pwd.equals("123")){

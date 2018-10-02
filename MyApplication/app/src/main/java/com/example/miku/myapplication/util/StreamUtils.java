@@ -22,4 +22,21 @@ public class StreamUtils {
         }
         return result;
     }
+    public static byte[] streamToByte(InputStream in ){
+        try{
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[1024];
+            int length = 0;
+            while((length = in.read(buffer)) != -1) {
+                out.write(buffer,0,length);
+                //out.flush();
+            }
+            return  out.toByteArray();
+            //out.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

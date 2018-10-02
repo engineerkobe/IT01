@@ -1,7 +1,6 @@
 package com.itheima.service;
 
 import java.io.IOException;
-import java.sql.*;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.itheima.service.bean.NewsBean;
+import com.itheima.service.bean.Book;
 import com.itheima.service.dao.NewsDao;
 
 
@@ -45,9 +44,11 @@ public class GetNewsServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
-//		http://192.168.14.101:8080/itheima72/servlet/GetNewsServlet
+		//強制使用者用utf8
 		response.setContentType("text/html;charset=UTF-8");
-/*
+		//http://192.168.43.166:8080/DemoWeb/GetNewsServlet
+		/*
+
 	{
 	    "newss": [
 	        {
@@ -84,27 +85,33 @@ public class GetNewsServlet extends HttpServlet {
 	}
 	
 
+
 		 */
 
+	            /*
+	             * 資料表|"ISBN"|"NAME"|"COVER"|"Borrower"|
+	             * ----|------|------|-------|----------|
+	             * 	    number text	  Blob	  Text
+	            */
 		try{
-			ArrayList<NewsBean> news = NewsDao.getNews();
+			ArrayList<Book> news = NewsDao.getBooks();
 			JSONArray jsonArray = new JSONArray();
-			for (NewsBean newsBean : news) {
+			for (Book newsBean : news) {
 				JSONObject newsJson = new JSONObject();
-				newsJson.put("BOOK_ID", newsBean.getBOOK_ID());
-				newsJson.put("BOOK_NAME", newsBean.getBOOK_NAME());
-				newsJson.put("WRITER", newsBean.getWRITER());
-				newsJson.put("OUTPUT", newsBean.getOUTPUT());
-				newsJson.put("PRICE", newsBean.getPRICE());
+				newsJson.put("ISBN", newsBean.getISBN());
+				newsJson.put("NAME", newsBean.getNAME());
+				newsJson.put("COVER", newsBean.getCOVER());
+				newsJson.put("BORROWER",newsBean.getBORROWER());
 				jsonArray.put(newsJson);
 			}
+
 			JSONObject allNewsJson = new JSONObject();
 			allNewsJson.put("newss", jsonArray);
-			String allNewsJsonTmp = allNewsJson.toString();
-			System.out.println(allNewsJsonTmp);
-			response.getOutputStream().write(allNewsJsonTmp.getBytes("UTF-8"));
-
+			//對使用者寫入字串
+			response.getOutputStream().write(allNewsJson.toString().getBytes("utf-8"));
+			
 		}catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -120,6 +127,7 @@ public class GetNewsServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 

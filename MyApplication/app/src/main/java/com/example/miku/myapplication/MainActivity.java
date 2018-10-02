@@ -1,8 +1,9 @@
 package com.example.miku.myapplication;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +15,8 @@ import com.example.miku.myapplication.util.StreamUtils;
 import com.example.miku.myapplication.util.UserInfoUtil;
 
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             et_password.setText(password);
             cb_rem.setChecked(true);
         }
+
     }
     private void login() {
         final String username = et_username.getText().toString().trim();
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if(issuccess) {
+                            //登入成功
                             //判斷是否記住密馬
                             if(isrem){
                                 boolean result = UserInfoUtil.saveUserInfo(mContext,username,password);
@@ -78,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
                             }else {
                                 Toast.makeText(mContext, "不保存帳號密碼", Toast.LENGTH_SHORT).show();
                             }
+//                            切換畫面
+                            Intent intent = new Intent(MainActivity.this, Book_List_Activity.class);
+                            startActivity(intent);
                         }else{
                             Toast.makeText(mContext, "登入失敗", Toast.LENGTH_SHORT).show();
                         }
@@ -85,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }).start();
-    }/*
+    }
+
      private boolean requestNetForGetLogin(String username,String password) {
         try {
             //用urlconnection 請求服務器將用戶密碼發送服務氣驗證
@@ -109,8 +114,7 @@ public class MainActivity extends AppCompatActivity {
         }
          return false;
     }
-    */
-
+/*
     private boolean requestNetForGetLogin(String username,String password) {
         try {
             //用urlconnection 請求服務器將用戶密碼發送服務氣驗證
@@ -140,4 +144,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+    */
 }

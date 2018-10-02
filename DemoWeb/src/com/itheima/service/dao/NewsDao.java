@@ -1,16 +1,17 @@
 package com.itheima.service.dao;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.itheima.service.bean.NewsBean;
+import com.itheima.service.bean.Book;
 
 public class NewsDao {
 
-	public static ArrayList<NewsBean> getNews(){
+	public static ArrayList<Book> getBooks(){
 
 		 Connection connection = null;
 	        Statement stmt = null;
@@ -18,8 +19,7 @@ public class NewsDao {
 	        String sql = null;
 
 	        try {
-	            /*****��д���ݿ������Ϣ(��������ݿ�����ҳ)*****/
-	            String databaseName = "demosql";
+	            String databaseName = "book";
 	            String host = "192.168.43.213";
 	            String port = "3306";
 	            String username = "root"; //�û�AK
@@ -29,40 +29,37 @@ public class NewsDao {
 	            String serverName = host + ":" + port + "/";
 	            String SSL = "?autoReconnect=true&useSSL=false";
 	            String connName = dbUrl + serverName + databaseName + SSL;;
-
-	           
+	            //註冊驅動
 	            Class.forName(driverName);
-	            connection = DriverManager.getConnection(connName, username,password);
-				if(connection != null && !connection.isClosed()) 
-	                System.out.println("資料庫連線測試成功！"); 
-				
+	            //創建連結URL 
+	            connection = DriverManager.getConnection(connName, username,
+	                    password);
+	            //開始連線
 	            stmt = connection.createStatement();
-	           
+	            //取得所有書的資料
 	            sql = "select * from book";
 	            ResultSet rss = stmt.executeQuery(sql);
-	            ArrayList<NewsBean> arrayList = new ArrayList<NewsBean>();
+	            /*
+	             * 資料表|"ISBN"|"NAME"|"COVER"|"Borrower"|
+	             * ----|------|------|-------|----------|
+	             * 	    number text	  Blob	  Text
+	            */
+	            ArrayList<Book> arrayList = new ArrayList<Book>();
 	            if(rss != null){
 	            	while(rss.next()){
-	            	/*	
-	            		int BOOK_ID = rss.getInt("BOOK_ID");
-	            		String BOOK_NAME = rss.getString("BOOK_NAME");
-	            		String WRITER = rss.getString("WRITER");
-	            		String OUTPUT = rss.getString("OUTPUT");
-	            		String PRICE = rss.getString("PRICE");
-	            	*/	
+	            		Book book = new Book();
+	            		String OGR_FID = rss.getString(1);
+	            		String ISBN = rss.getString(2);
+	            		String NAME = rss.getString(3);
+	            		String COVER = rss.getString(4);
+	            		String BORROWER = rss.getString(5);
 	            		
-	            		int BOOK_ID = rss.getInt(1);
-	            		String BOOK_NAME = rss.getString(3);
-	            		String WRITER = rss.getString(4);
-	            		String OUTPUT = rss.getString(5);
-	            		String PRICE = rss.getString(6);
-	            		NewsBean newsBean = new NewsBean();
-	            		newsBean.setBOOK_ID(BOOK_ID);
-	            		newsBean.setBOOK_NAME(BOOK_NAME);
-	            		newsBean.setWRITER(WRITER);
-	            		newsBean.setOUTPUT(OUTPUT);
-	            		newsBean.setPRICE(PRICE);
-	            		arrayList.add(newsBean);
+	            		//book.setOGR_FID(OGR_FID);
+	            		book.setISBN(ISBN);
+	            		book.setNAME(NAME);
+	            		book.setCOVER(COVER);
+	            		book.setBORROWER(BORROWER);
+	            		arrayList.add(book);
 	            	}
 	            	return arrayList;
 	            	
@@ -70,6 +67,7 @@ public class NewsDao {
 	            
 //	            response.getOutputStream().write((execute+"").getBytes());
 	        } catch (Exception e) {
+	        	e.printStackTrace();
 	        }
 	        return null;
 		
