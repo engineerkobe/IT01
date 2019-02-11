@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/main_fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/main_menu_radiogroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <RadioGroup
+        android:id="@+id/main_menu_radiogroup"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+
+        android:background="?attr/colorButtonNormal"
+        android:checkedButton="@+id/main_menu_home"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_fragment_container">
+
+        <RadioButton
+            android:id="@+id/main_menu_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/x_nav_main_menu_home"
+
+            android:gravity="center"
+            android:text="@string/main_home" />
+
+        <RadioButton
+            android:id="@+id/main_menu_not_implement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/x_nav_main_menu_not_implement"
+
+
+            android:gravity="center"
+            android:text="@string/main_not_implemented" />
+
+        <RadioButton
+            android:id="@+id/main_menu_borrow_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/x_nav_main_menu_borrow_book"
+
+            android:gravity="center"
+            android:text="@string/main_borrow_book" />
+
+        <RadioButton
+            android:id="@+id/main_menu_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/x_nav_main_menu_account"
+
+            android:gravity="center"
+            android:text="@string/main_account" />
+
+    </RadioGroup>
+</android.support.constraint.ConstraintLayout>
+
