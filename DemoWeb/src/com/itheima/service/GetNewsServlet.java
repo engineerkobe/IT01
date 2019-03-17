@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.itheima.service.bean.Book;
-import com.itheima.service.dao.NewsDao;
+import com.itheima.service.dao.MyDB;
 
 
 public class GetNewsServlet extends HttpServlet {
@@ -94,20 +94,22 @@ public class GetNewsServlet extends HttpServlet {
 	             * 	    number text	  Blob	  Text
 	            */
 		try{
-			ArrayList<Book> news = NewsDao.getBooks();
+			ArrayList<Book> news = MyDB.getBookList();
 			JSONArray jsonArray = new JSONArray();
 			for (Book newsBean : news) {
 				JSONObject newsJson = new JSONObject();
 				newsJson.put("ISBN", newsBean.getISBN());
-				newsJson.put("NAME", newsBean.getNAME());
-				newsJson.put("COVER", newsBean.getCOVER());
-				newsJson.put("BORROWER",newsBean.getBORROWER());
+//////				newsJson.put("NAME", newsBean.getNAME());
+////				newsJson.put("COVER", newsBean.getCOVER());
+//				newsJson.put("BORROWER",newsBean.getBORROWER());
+//				newsJson.put("BOOKCASE", newsBean.getBOOKCASE());
 				jsonArray.put(newsJson);
 			}
 
 			JSONObject allNewsJson = new JSONObject();
 			allNewsJson.put("newss", jsonArray);
 			//對使用者寫入字串
+			System.out.println("com.itheima.service.GetNewsSerlet:"+allNewsJson.toString());
 			response.getOutputStream().write(allNewsJson.toString().getBytes("utf-8"));
 			
 		}catch (Exception e) {

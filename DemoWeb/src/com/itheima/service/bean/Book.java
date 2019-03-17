@@ -3,40 +3,44 @@ package com.itheima.service.bean;
 import java.sql.Blob ;
 
 public class Book {
+	/*
+	 *  +---------+--------------+------+-----+---------+-------+
+		| Field   | Type         | Null | Key | Default | Extra |
+		+---------+--------------+------+-----+---------+-------+
+		| isbn    | varchar(255) | NO   | PRI | NULL    |       |
+		| name    | varchar(255) | NO   |     | NULL    |       |
+		| content | text         | NO   |     | NULL    |       |
+		| count   | int(11)      | NO   |     | NULL    |       |
+		+---------+--------------+------+-----+---------+-------+
+	 */
 	private String ISBN;
-	private String NAME;
-	private String COVER;
-	private String BORROWER;
-	private String OGR_FID;
+	private String Name;
+	private String Content;
+	private int Count;
+	
 	public String getISBN() {
 		return ISBN;
 	}
 	public void setISBN(String iSBN) {
 		ISBN = iSBN;
 	}
-	public String getNAME() {
-		return NAME;
+	public String getName() {
+		return Name;
 	}
-	public void setNAME(String nAME) {
-		NAME = nAME;
+	public void setName(String name) {
+		Name = name;
 	}
-	public String getCOVER() {
-		return COVER;
+	public String getContent() {
+		return Content;
 	}
-	public void setCOVER(String cOVER) {
-		COVER = cOVER;
+	public void setContent(String content) {
+		Content = content;
 	}
-	public String getBORROWER() {
-		return BORROWER;
+	public int getCount() {
+		return Count;
 	}
-	public void setBORROWER(String bORROW) {
-		BORROWER = bORROW;
-	}
-	public String getOGR_FID() {
-		return OGR_FID;
-	}
-	public void setOGR_FID(String oGR_FID) {
-		OGR_FID = oGR_FID;
+	public void setCount(int count) {
+		Count = count;
 	}
 	
 

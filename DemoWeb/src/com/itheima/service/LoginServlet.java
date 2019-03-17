@@ -1,12 +1,13 @@
 package com.itheima.service;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.itheima.service.user.GetUser;
 
 public class LoginServlet extends HttpServlet {
 
@@ -44,14 +45,15 @@ public class LoginServlet extends HttpServlet {
 		
 		System.out.println("DemoWeb.LoginServlet.username:"+username);
 		System.out.println("DemoWeb.LoginServlet.password:"+pwd);
-		if(username != null && !"".equals(username) && pwd != null && !"".equals(pwd)){
-			
-			if(username.equals("root") && pwd.equals("123")){
+		if(username != null && 
+		   pwd != null &&
+		   username.matches("[A-Za-z0-9]+") &&
+		   pwd.matches("[A-Za-z0-9]+")){
+			if(GetUser.getUserInfo(username, pwd)!= null){
 				response.getOutputStream().write("login success".getBytes());  //gbk����
 			}else{
 				response.getOutputStream().write("login faile".getBytes());	
 			}
-			
 		}else{
 			response.getOutputStream().write("login fail; username or password is null".getBytes());	
 		}
