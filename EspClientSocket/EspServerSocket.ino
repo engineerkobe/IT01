@@ -21,6 +21,7 @@ boolean key = false;
 long saveTime = 0;
 
 void setup() {
+  delay(3000);
   Serial.begin(9600);
   //RFID初始化
   SPI.begin();
@@ -61,13 +62,14 @@ void loop() { // run over and over
     Serial.println(mfrc522.PICC_GetTypeName(piccType));
     //    Serial.print("UID Size: ");       // 顯示卡片的UID長度值
     //Serial.println(idSize);
-    String tmp1 = "id:";
+    String tmp1 = "id=";
     for (byte i = 0; i < idSize; i++) {  // 逐一顯示UID碼
       if(id[i] < 16) 
         tmp1+="0";
       tmp1+=String(id[i], HEX);
       
     }
+    tmp1+=",book_case_name=3";
     tmp1+="\r\n";
     String respon2 = sendCommand(tmp1,500,DEBUG);
     Serial.println(respon2);
