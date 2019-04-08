@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:id="@+id/book_login_main_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight= "40dp"
+        android:layout_marginLeft = "40dp"
+        android:layout_marginTop="50dp"
+        android:hint="@string/please_type_you_account"
+        />
+
+    <EditText
+        android:id="@+id/book_login_main_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight= "40dp"
+        android:layout_marginLeft = "40dp"
+        android:paddingTop="20dp"
+        android:hint="@string/please_type_you_password"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:orientation="horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight= "40dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="@string/auto_login"
+            />
+        <CheckBox
+            android:id="@+id/book_login_main_auto_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            >
+            <Button
+                android:id="@+id/book_login_main_login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

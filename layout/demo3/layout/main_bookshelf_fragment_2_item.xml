@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="top"
+    tools:layout_editor_absoluteY="25dp"
+    >
+
+    <ImageView
+        android:id="@+id/main_bookshelf_list_recyclerview_item"
+        android:layout_width="51dp"
+        android:layout_height="59dp"
+        android:padding="3dp"
+        app:srcCompat="@color/design_default_color_primary_dark" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:text="Hello world"
+        />
+</LinearLayout>
